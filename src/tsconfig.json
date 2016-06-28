@@ -15,9 +15,25 @@
     "target": "es5",
     "inlineSources": true
   },
-
+  "filesGlob": [
+    "main.ts",
+    "typings.d.ts",
+    "**/*.ts"
+  ],
   "files": [
     "main.ts",
-    "typings.d.ts"
-  ]
+    "typings.d.ts",
+    "app/app.component.ts",
+    "app/environment.ts",
+    "app/index.ts",
+    "app/taquin/index.ts",
+    "app/taquin/taquin-board.component.ts",
+    "app/taquin/taquin-piece.component.ts",
+    "app/taquin/taquin-piece.ts",
+    "app/taquin/taquin.service.ts",
+    "system-config.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
 }

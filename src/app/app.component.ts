@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { TaquinBoardComponent, TaquinService } from './taquin';
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css']
+  directives: [TaquinBoardComponent],
+  providers: [TaquinService]
 })
 export class AppComponent {
   title = 'app works!';

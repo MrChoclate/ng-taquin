@@ -1,0 +1,7 @@
+<table>
+  <td *ngFor="let row of taquinPieces">
+    <tr *ngFor="let taquinPiece of row">
+      <taquin-piece (onTap)="onTap($event)" [piece]="taquinPiece"></taquin-piece>
+    </tr>
+  </td>
+</table>
