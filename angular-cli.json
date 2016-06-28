@@ -1,7 +1,7 @@
 {
   "project": {
     "version": "1.0.0-beta.8",
-    "name": "taquin"
+    "name": "ng-taquin"
   },
   "apps": [
     {
