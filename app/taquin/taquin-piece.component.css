@@ -1,0 +1,11 @@
+img {
+  box-shadow: 2px 2px 5px 0px #656565;
+}
+
+.selected {
+  opacity: 0.3;
+}
+
+:host {
+  display: block;
+}
