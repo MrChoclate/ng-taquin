@@ -17,13 +17,15 @@ export class TaquinPieceComponent implements OnInit {
 
   constructor(private taquinService: TaquinService) {}
 
-  ngOnInit() {
-    this.taquinService.getPartialImage(this.piece.origineX, this.piece.origineY).then(
+  ngOnInit(): void {
+    let [x, y] = [this.piece.origineX, this.piece.origineY];
+
+    this.taquinService.getPartialImage(x, y).then(
       (data) => this.imageData = data
     );
   }
 
-  @HostListener('click', ['$event']) onClick(e) {
+  @HostListener('click', ['$event']) onClick(e): void {
     this.onTap.emit(this.piece.id);
   }
 

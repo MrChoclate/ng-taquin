@@ -9,5 +9,4 @@ import { TaquinBoardComponent, TaquinService } from './taquin';
   providers: [TaquinService]
 })
 export class AppComponent {
-  title = 'app works!';
 }

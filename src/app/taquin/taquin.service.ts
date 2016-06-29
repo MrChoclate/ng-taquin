@@ -4,7 +4,7 @@ import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class TaquinService {
-  image: Observable<HTMLImageElement>
+  image: Observable<HTMLImageElement>;
 
   constructor() {
     let observable = Observable.create(
@@ -22,14 +22,14 @@ export class TaquinService {
     let SIZE = 3;
     let promise = new Promise<string>(function (resolve, reject) {
       self.image.subscribe(function (img) {
-        let canvas = document.createElement("canvas");
+        let canvas = document.createElement('canvas');
         canvas.width = img.width / SIZE;
         canvas.height = img.height / SIZE;
         let img_x = - canvas.width * x;
         let img_y = - canvas.height * y;
-        let ctx = canvas.getContext("2d");
+        let ctx = canvas.getContext('2d');
         ctx.drawImage(img, img_x, img_y, img.width, img.height);
-        let dataURL = canvas.toDataURL("image/png");
+        let dataURL = canvas.toDataURL('image/png');
         resolve(dataURL);
       });
     });

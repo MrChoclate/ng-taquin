@@ -20,17 +20,17 @@ export class TaquinBoardComponent implements OnInit {
   constructor(private taquinService: TaquinService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.reset();
     this.shuffle();
   }
 
-  reset() {
+  reset(): void {
     this.taquinPieces = [];
     for (let i = 0; i < this.SIZE; i++) {
       this.taquinPieces.push([]);
       for (let j = 0; j < this.SIZE; j++) {
-        let piece = new TaquinPiece(this.SIZE * i + j, i, j, i == 0 && j == 0)
+        let piece = new TaquinPiece(this.SIZE * i + j, i, j, i === 0 && j === 0);
         this.taquinPieces[i].push(piece);
       }
     }
@@ -45,18 +45,19 @@ export class TaquinBoardComponent implements OnInit {
     return Math.floor((Math.random() * this.SIZE)) - 1;
   }
 
-  isValid(srcX, srcY, destX, destY) {
+  isValid(srcX: number, srcY: number, destX: number, destY: number): boolean {
     let inBoard = srcX < this.SIZE && 0 <= srcX &&
                   srcY < this.SIZE && 0 <= srcY &&
                   destY < this.SIZE && 0 <= destY &&
                   destX < this.SIZE && 0 <= destX;
     let validDist = Math.abs(srcX - destX) <= 1 &&
                     Math.abs(srcY - destY) <= 1 &&
-                    Math.abs(srcX - destX) + Math.abs(srcY - destY) == 1;
+                    Math.abs(srcX - destX) + Math.abs(srcY - destY) === 1;
+
     return inBoard && validDist;
   }
 
-  swap(srcX, srcY, destX, destY): boolean {
+  swap(srcX: number, srcY: number, destX: number, destY: number): boolean {
     if (this.isValid(srcX, srcY, destX, destY)) {
       [
         this.taquinPieces[srcX][srcY], this.taquinPieces[destX][destY]
@@ -68,12 +69,7 @@ export class TaquinBoardComponent implements OnInit {
     return false;
   }
 
-  move(x, y) {
-    let [srcX, srcY] = this.selectedCoord;
-    this.swap(srcX, srcY, x, y);
-  }
-
-  shuffle() {
+  shuffle(): void {
     for (let i = 0; i < 100; i++) {
       let x = this._randomPick();
       let y = this._randomPick();
@@ -84,21 +80,21 @@ export class TaquinBoardComponent implements OnInit {
     }
   }
 
-  movePiece(x: number, y: number) {
+  movePiece(x: number, y: number):  void {
     let [srcX, srcY] = this.selectedCoord;
-    let selectedPiece = this.taquinPieces[srcX][srcY];
 
     if (this.swap(srcX, srcY, x, y)) {
       this.selectedCoord = [x, y];
     }
   }
 
-  onTap(id: number) {
+  onTap(id: number): void {
+    let [toMovePieceX, toMovePieceY] = [0, 0];
     for (let i = 0; i < this.SIZE; i++) {
       for (let j = 0; j < this.SIZE; j++) {
-        if (this.taquinPieces[i][j].id == id) {
-          var toMovePieceX = i;
-          var toMovePieceY = j;
+        if (this.taquinPieces[i][j].id === id) {
+          toMovePieceX = i;
+          toMovePieceY = j;
         }
       }
     }
@@ -106,19 +102,19 @@ export class TaquinBoardComponent implements OnInit {
     this.movePiece(toMovePieceX, toMovePieceY);
   }
 
-  @HostListener('document:keydown', ['$event']) onKeypress (e: KeyboardEvent) {
+  @HostListener('document:keydown', ['$event']) onKeypress (e: KeyboardEvent): void {
     let [dirX, dirY] = [0, 0];
     switch (e.key) {
-      case "ArrowDown":
+      case 'ArrowDown':
         dirY += 1;
         break;
-      case "ArrowUp":
+      case 'ArrowUp':
         dirY -= 1;
         break;
-      case "ArrowLeft":
+      case 'ArrowLeft':
         dirX -= 1;
         break;
-      case "ArrowRight":
+      case 'ArrowRight':
         dirX += 1;
         break;
     }
