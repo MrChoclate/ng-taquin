@@ -20,7 +20,7 @@ export class TaquinPieceComponent implements OnInit {
   ngOnInit(): void {
     let [x, y] = [this.piece.origineX, this.piece.origineY];
 
-    this.taquinService.getPartialImage(x, y).then(
+    this.taquinService.getPartialImage(x, y).subscribe(
       (data) => this.imageData = data
     );
   }

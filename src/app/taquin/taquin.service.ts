@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaquinService {
+  SIZE = 3;
   image: Observable<HTMLImageElement>;
+  imageData: Observable<string>[][];
 
   constructor() {
     let observable = Observable.create(
@@ -15,26 +18,35 @@ export class TaquinService {
       }
     );
     this.image = observable;
+
+    this.imageData = [];
+    for (let i = 0; i < this.SIZE; i++) {
+      this.imageData.push([]);
+      for (let j = 0; j < this.SIZE; j++) {
+        this.imageData[i].push(
+          this.image.map<string>((img) =>
+            this._buildDataURL(img, i, j)
+          )
+        );
+      }
+    }
   }
 
-  getPartialImage(x: number, y: number): Promise<string> {
-    let self = this;
-    let SIZE = 3;
-    let promise = new Promise<string>(function (resolve, reject) {
-      self.image.subscribe(function (img) {
-        let canvas = document.createElement('canvas');
-        canvas.width = img.width / SIZE;
-        canvas.height = img.height / SIZE;
-        let img_x = - canvas.width * x;
-        let img_y = - canvas.height * y;
-        let ctx = canvas.getContext('2d');
-        ctx.drawImage(img, img_x, img_y, img.width, img.height);
-        let dataURL = canvas.toDataURL('image/png');
-        resolve(dataURL);
-      });
-    });
+  _buildDataURL(img, x, y): string {
+    let canvas = document.createElement('canvas');
+    canvas.width = img.width / this.SIZE;
+    canvas.height = img.height / this.SIZE;
+    let img_x = - canvas.width * x;
+    let img_y = - canvas.height * y;
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(img, img_x, img_y, img.width, img.height);
+    let dataURL = canvas.toDataURL('image/png');
 
-    return promise;
+    return dataURL;
+  }
+
+  getPartialImage(x: number, y: number): Observable<string> {
+    return this.imageData[x][y];
   }
 
 }
