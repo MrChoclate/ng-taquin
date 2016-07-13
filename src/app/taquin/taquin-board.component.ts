@@ -106,16 +106,16 @@ export class TaquinBoardComponent implements OnInit {
     let [dirX, dirY] = [0, 0];
     switch (e.key) {
       case 'ArrowDown':
-        dirY += 1;
+        dirX += 1;
         break;
       case 'ArrowUp':
-        dirY -= 1;
-        break;
-      case 'ArrowLeft':
         dirX -= 1;
         break;
+      case 'ArrowLeft':
+        dirY -= 1;
+        break;
       case 'ArrowRight':
-        dirX += 1;
+        dirY += 1;
         break;
     }
 

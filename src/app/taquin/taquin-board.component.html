@@ -1,7 +1,7 @@
-<table>
-  <td *ngFor="let row of taquinPieces">
-    <tr *ngFor="let taquinPiece of row">
+<div class="vertiacal-flex">
+  <div *ngFor="let row of taquinPieces" class="horizontal-flex">
+    <div *ngFor="let taquinPiece of row" class="padding">
       <taquin-piece (onTap)="onTap($event)" [piece]="taquinPiece"></taquin-piece>
-    </tr>
-  </td>
-</table>
+    </div>
+  </div>
+</div>
