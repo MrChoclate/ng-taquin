@@ -1,0 +1,14 @@
+.box {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.child {
+  padding: 4px;
+  flex: 0 1 auto;
+  max-width: calc(33% - 8px);
+}
+
+.break {
+  width: 100%;
+}
