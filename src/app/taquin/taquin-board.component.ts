@@ -102,6 +102,10 @@ export class TaquinBoardComponent implements OnInit {
     this.movePiece(toMovePieceX, toMovePieceY);
   }
 
+  get flattenTaquinPieces(): TaquinPiece[] {
+    return this.taquinPieces.reduce((a, b) => a.concat(b), []);
+  }
+
   @HostListener('document:keydown', ['$event']) onKeypress (e: KeyboardEvent): void {
     let [dirX, dirY] = [0, 0];
     switch (e.key) {

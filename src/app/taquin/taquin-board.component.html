@@ -1,7 +1,6 @@
-<div class="vertiacal-flex">
-  <div *ngFor="let row of taquinPieces" class="horizontal-flex">
-    <div *ngFor="let taquinPiece of row" class="padding">
-      <taquin-piece (onTap)="onTap($event)" [piece]="taquinPiece"></taquin-piece>
-    </div>
-  </div>
+<div class="box">
+  <template ngFor let-taquinPiece [ngForOf]="flattenTaquinPieces" let-i="index">
+    <div *ngIf="(i % SIZE) == 0" class="break"></div>
+    <taquin-piece (onTap)="onTap($event)" [piece]="taquinPiece" class="child"></taquin-piece>
+  </template>
 </div>
