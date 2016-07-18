@@ -13,7 +13,8 @@ export class TaquinService {
     let observable = Observable.create(
       function (observer: Observer<HTMLImageElement>) {
         let img = new Image();
-        img.src = 'images/test.jpg';
+        img.crossOrigin = 'anonymous';
+        img.src = '//source.unsplash.com/featured/?woman';
         img.onload = () => observer.next(img);
       }
     );
